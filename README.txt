@@ -1,3 +1,6 @@
+This project is downloaded from codenjoy.com.
+Here I develop my own realization of bot for tetris game.
+
 Getting started:
 1. Install Maven from http://maven.apache.org
 2. Import Maven project from IDE

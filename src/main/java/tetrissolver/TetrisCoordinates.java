@@ -1,3 +1,4 @@
+package tetrissolver;
 
 
 public class TetrisCoordinates {

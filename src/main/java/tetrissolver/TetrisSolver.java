@@ -1,3 +1,5 @@
+package tetrissolver;
+
 public class TetrisSolver {
     final static int DO_NOT_ROTATE = 0;
     final static int ROTATE_90_CLOCKWISE = 1;

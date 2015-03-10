@@ -1,6 +1,9 @@
+package tetrissolver;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import tetrissolver.TetrisSolver;
 
 public class TetrisSolverTest {
 

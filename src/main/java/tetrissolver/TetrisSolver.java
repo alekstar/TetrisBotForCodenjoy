@@ -4,12 +4,9 @@ import commands.Drop;
 import commands.MoveLeft;
 import commands.MoveRight;
 import commands.Rotate;
+import commands.Rotate.Angle;
 
 public class TetrisSolver {
-    final static int DO_NOT_ROTATE = 0;
-    final static int ROTATE_90_CLOCKWISE = 1;
-    final static int ROTATE_180_CLOCKWISE = 2;
-    final static int ROTATE_90_COUNTERCLOCKWISE = 3;
 
     private String moveLeft(int times) {
         MoveLeft moveLeft = MoveLeft.create(times);
@@ -21,8 +18,8 @@ public class TetrisSolver {
         return moveRight.defineCommandLine();
     }
 
-    private String rotate(int times) {
-        Rotate rotate = Rotate.create(times);
+    private String rotate(Angle angle) {
+        Rotate rotate = Rotate.create(angle);
         return rotate.defineCommandLine();
     }
 

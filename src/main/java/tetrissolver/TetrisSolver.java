@@ -1,5 +1,10 @@
 package tetrissolver;
 
+import commands.Drop;
+import commands.MoveLeft;
+import commands.MoveRight;
+import commands.Rotate;
+
 public class TetrisSolver {
     final static int DO_NOT_ROTATE = 0;
     final static int ROTATE_90_CLOCKWISE = 1;
@@ -7,28 +12,23 @@ public class TetrisSolver {
     final static int ROTATE_90_COUNTERCLOCKWISE = 3;
 
     private String moveLeft(int times) {
-        if (times < 0) {
-            throw new IllegalArgumentException("Argument times is less zero.");
-        }
-        return "left=" + times;
+        MoveLeft moveLeft = MoveLeft.create(times);
+        return moveLeft.defineCommandLine();
     }
 
     private String moveRight(int times) {
-        if (times < 0) {
-            throw new IllegalArgumentException("Argument times is less zero.");
-        }
-        return "right=" + times;
+        MoveRight moveRight = MoveRight.create(times);
+        return moveRight.defineCommandLine();
     }
 
     private String rotate(int times) {
-        if (times < 0) {
-            throw new IllegalArgumentException("Argument times is less zero.");
-        }
-        return "rotate=" + times;
+        Rotate rotate = Rotate.create(times);
+        return rotate.defineCommandLine();
     }
 
     private String drop() {
-        return "drop";
+        Drop drop = Drop.create();
+        return drop.defineCommandLine();
     }
 
     private TetrisCoordinates defineFreeCellCoordinatesForCube(Field field) {

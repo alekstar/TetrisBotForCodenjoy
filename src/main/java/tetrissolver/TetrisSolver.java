@@ -1,82 +1,48 @@
 package tetrissolver;
 
+import shapes.ShapeSolver;
+import shapes.SolverForI;
+import shapes.SolverForO;
+import tetrissolver.exceptions.BehaviourForFigureIsNotDefinedException;
 import commands.Drop;
-import commands.MoveLeft;
-import commands.MoveRight;
-import commands.Rotate;
-import commands.Rotate.Angle;
 
 public class TetrisSolver {
-
-    private String moveLeft(int times) {
-        MoveLeft moveLeft = MoveLeft.create(times);
-        return moveLeft.defineCommandLine();
-    }
-
-    private String moveRight(int times) {
-        MoveRight moveRight = MoveRight.create(times);
-        return moveRight.defineCommandLine();
-    }
-
-    private String rotate(Angle angle) {
-        Rotate rotate = Rotate.create(angle);
-        return rotate.defineCommandLine();
-    }
 
     private String drop() {
         Drop drop = Drop.create();
         return drop.defineCommandLine();
     }
 
-    private TetrisCoordinates defineFreeCellCoordinatesForCube(Field field) {
-        for (int y = 0; y < field.defineDefaultFieldHeight(); y++) {
-            for (int x = 0; x < field.defineDefaultFieldWidth() - 1; x++) {
-                if (!field.isFilledCellAt(x, y)
-                        && !field.isFilledCellAt(x + 1, y)) {
-                    return TetrisCoordinates.create(x, y);
-                }
-            }
-        }
-        throw new RuntimeException("Can't find free cell");
-    }
-
-    private String defineCommandForCube(Field field) {
-        TetrisCoordinates coordinates = defineFreeCellCoordinatesForCube(field);
-        if (coordinates.getX() < 5) {
-            return moveLeft(4 - coordinates.getX()) + ", " + drop();
-        } else /* if (coordinates.getX() >= 5) */{
-            return moveRight(coordinates.getX() - 4) + ", " + drop();
-        }
-    }
-
-    private TetrisCoordinates defineFreeCellCoordinatesForLine(Field field) {
-        for (int y = 0; y < field.defineDefaultFieldHeight(); y++) {
-            for (int x = 0; x < field.defineDefaultFieldWidth(); x++) {
-                if (!field.isFilledCellAt(x, y)) {
-                    return TetrisCoordinates.create(x, y);
-                }
-            }
-        }
-        throw new RuntimeException("Can't find free cell");
-    }
-
-    private String defineCommandForLine(Field field) {
-        TetrisCoordinates coordinates = defineFreeCellCoordinatesForLine(field);
-        if (coordinates.getX() < 5) {
-            return moveLeft(4 - coordinates.getX()) + ", " + drop();
+    private ShapeSolver defineSolverForFigure(Field field, String figure) {
+        if (figure.contentEquals("O")) {
+            return SolverForO.create(field);
+        } else if (figure.contentEquals("I")) {
+            return SolverForI.create(field);
         } else {
-            return moveRight(coordinates.getX() - 4) + ", " + drop();
+            throw new BehaviourForFigureIsNotDefinedException(figure);
         }
     }
 
     private String defineCommand(Field field, String figure) {
-        if (figure.contentEquals("O")) {
-            return defineCommandForCube(field);
-        } else if (figure.contentEquals("I")) {
-            return defineCommandForLine(field);
-        } else {
+        try {
+            ShapeSolver solver = defineSolverForFigure(field, figure);
+            return solver.defineCommandLine();
+        } catch (BehaviourForFigureIsNotDefinedException e) {
+            String message =
+                    generateMessageForBehaviourForFigureIsNotDefinedException(e
+                            .getMessage());
+            System.err.println(message);
             return drop();
         }
+    }
+
+    private String generateMessageForBehaviourForFigureIsNotDefinedException(
+            String figureFromException) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Behaviour for figure \"");
+        stringBuilder.append(figureFromException);
+        stringBuilder.append("\" is not defined. Called command \"drop\".");
+        return stringBuilder.toString();
     }
 
     public String answer(String figure, int x, int y, String glass, String next) {

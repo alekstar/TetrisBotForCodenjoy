@@ -1,4 +1,4 @@
-This project is downloaded from codenjoy.com.
+This project have been downloaded from codenjoy.com.
 Here I develop my own realization of bot for tetris game.
 
 Getting started:

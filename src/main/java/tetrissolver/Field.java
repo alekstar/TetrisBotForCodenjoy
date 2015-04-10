@@ -75,7 +75,17 @@ public class Field {
     public boolean isFilledCellAt(int x, int y) {
         checkX(x);
         checkY(y);
-        return fieldArray.get(y * getWidth() + x);
+        return fieldArray.get(calculateIndexOfFieldArray(x, y));
+    }
+
+    public void fillCellAt(int x, int y) {
+        checkX(x);
+        checkY(y);
+        fieldArray.set(calculateIndexOfFieldArray(x, y), new Boolean(true));
+    }
+
+    private int calculateIndexOfFieldArray(int x, int y) {
+        return y * getWidth() + x;
     }
 
     public static int defineDefaultFieldHeight() {

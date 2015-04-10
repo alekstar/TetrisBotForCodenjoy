@@ -2,6 +2,7 @@ package tetrissolver;
 
 import shapes.ShapeSolver;
 import shapes.SolverForI;
+import shapes.SolverForJ;
 import shapes.SolverForO;
 import tetrissolver.exceptions.BehaviourForFigureIsNotDefinedException;
 import commands.Drop;
@@ -18,6 +19,8 @@ public class TetrisSolver {
             return SolverForO.create(field);
         } else if (figure.contentEquals("I")) {
             return SolverForI.create(field);
+        } else if (figure.contentEquals("J")) {
+            return SolverForJ.create(field);
         } else {
             throw new BehaviourForFigureIsNotDefinedException(figure);
         }

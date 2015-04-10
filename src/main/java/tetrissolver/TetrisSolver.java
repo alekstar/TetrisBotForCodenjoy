@@ -51,6 +51,9 @@ public class TetrisSolver {
         // return "left=4, right=3, rotate=0, drop";
 
         Field field = Field.create(glass);
+        FieldPrinter fieldPrinter = FieldPrinter.create(field);
+        System.out.println("Field:");
+        fieldPrinter.print();
         return defineCommand(field, figure);
         // return "left=4, drop";
     }

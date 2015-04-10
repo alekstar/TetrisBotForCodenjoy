@@ -39,4 +39,36 @@ public class FieldTest {
                 Field.defineDefaultFieldWidth(),
                 Field.defineDefaultFieldHeight()));
     }
+
+    private boolean haveToBeFilled(TetrisCoordinates checkedCell,
+            TetrisCoordinates[] filledCells) {
+        for (int i = 0; i < filledCells.length; i++) {
+            if (filledCells[i].equals(checkedCell)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean areFilledOnlySpecifiedCells(Field field,
+            TetrisCoordinates[] filledCells) {
+        for (int y = 0; y < field.getHeight(); y++) {
+            for (int x = 0; x < field.getWidth(); x++) {
+                if (haveToBeFilled(TetrisCoordinates.create(x, y), filledCells)
+                        && !field.isFilledCellAt(x, y)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Test
+    public void shouldFillOnlyCellAt4x5AtField() {
+        Field field = Field.createStandartEmptyField();
+        field.fillCellAt(4, 5);
+        TetrisCoordinates[] filledCells =
+                new TetrisCoordinates[] { new TetrisCoordinates(4, 5) };
+        assertTrue(areFilledOnlySpecifiedCells(field, filledCells));
+    }
 }

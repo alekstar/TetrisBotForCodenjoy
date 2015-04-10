@@ -32,5 +32,11 @@ public class FieldTest {
         assertTrue(isFieldEmptyAndItsSizeIs(field, 10, 20));
     }
 
+    @Test
+    public void shouldCreateEmptyStandartField() {
+        Field field = Field.createStandartEmptyField();
+        assertTrue(isFieldEmptyAndItsSizeIs(field,
+                Field.defineDefaultFieldWidth(),
+                Field.defineDefaultFieldHeight()));
     }
 }

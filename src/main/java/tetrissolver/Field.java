@@ -25,6 +25,15 @@ public class Field {
         }
     }
 
+    protected Field(int width, int height) {
+        setWidth(width);
+        setHeight(height);
+        initializeFieldArray();
+        for (int i = 0; i < getWidth() * getHeight(); i++) {
+            add(false);
+        }
+    }
+
     public static Field create(String fieldString, int width, int height) {
         return new Field(fieldString, width, height);
     }
@@ -32,6 +41,10 @@ public class Field {
     public static Field create(String fieldString) {
         return Field.create(fieldString, defineDefaultFieldWidth(),
                 defineDefaultFieldHeight());
+    }
+
+    public static Field createEmptyField(int width, int height) {
+        return new Field(width, height);
     }
 
     private static char defineFilledCellCharValue() {

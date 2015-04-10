@@ -34,12 +34,12 @@ public class Field {
         }
     }
 
-    public static Field create(String fieldString, int width, int height) {
+    public static Field createFieldFromString(String fieldString, int width, int height) {
         return new Field(fieldString, width, height);
     }
 
-    public static Field create(String fieldString) {
-        return Field.create(fieldString, defineDefaultFieldWidth(),
+    public static Field createStandartFieldFromString(String fieldString) {
+        return Field.createFieldFromString(fieldString, defineDefaultFieldWidth(),
                 defineDefaultFieldHeight());
     }
 

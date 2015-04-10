@@ -50,7 +50,7 @@ public class TetrisSolver {
         // for details please check http://codenjoy.com/portal/?p=170#commands
         // return "left=4, right=3, rotate=0, drop";
 
-        Field field = Field.create(glass);
+        Field field = Field.createStandartFieldFromString(glass);
         FieldPrinter fieldPrinter = FieldPrinter.create(field);
         System.out.println("Field:");
         fieldPrinter.print();

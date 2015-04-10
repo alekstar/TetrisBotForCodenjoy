@@ -6,9 +6,15 @@ import org.junit.Test;
 
 public class FieldTest {
 
-    private boolean isFieldEmpty(Field field) {
+    private boolean isFieldEmptyAndItsSizeIs(Field field, int width, int height) {
         if (field == null) {
             throw new IllegalArgumentException("Argument field is null.");
+        }
+        if (field.getWidth() != width) {
+            return false;
+        }
+        if (field.getHeight() != height) {
+            return false;
         }
         for (int y = 0; y < field.getHeight(); y++) {
             for (int x = 0; x < field.getWidth(); x++) {
@@ -21,8 +27,10 @@ public class FieldTest {
     }
 
     @Test
-    public void ShouldCreateEmptyField10x20() {
+    public void shouldCreateEmptyField10x20() {
         Field field = Field.createEmptyField(10, 20);
-        assertTrue(isFieldEmpty(field));
+        assertTrue(isFieldEmptyAndItsSizeIs(field, 10, 20));
+    }
+
     }
 }

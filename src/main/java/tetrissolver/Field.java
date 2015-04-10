@@ -1,11 +1,16 @@
 package tetrissolver;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Field {
-    List<Boolean> fieldArray;
+    private List<Boolean> fieldArray;
+    private int width;
+    private int height;
 
-    protected Field(String fieldString) {
+    protected Field(String fieldString, int width, int height) {
+        setWidth(width);
+        setHeight(height);
         initializeFieldArray();
         for (char currentChar : fieldString.toCharArray()) {
             if (currentChar == defineClearCellCharValue()) {
@@ -20,16 +25,20 @@ public class Field {
         }
     }
 
-    public static Field create(String fieldString) {
-        Field field = new Field(fieldString);
-        return field;
+    public static Field create(String fieldString, int width, int height) {
+        return new Field(fieldString, width, height);
     }
 
-    private char defineFilledCellCharValue() {
+    public static Field create(String fieldString) {
+        return Field.create(fieldString, defineDefaultFieldWidth(),
+                defineDefaultFieldHeight());
+    }
+
+    private static char defineFilledCellCharValue() {
         return '*';
     }
 
-    private char defineClearCellCharValue() {
+    private static char defineClearCellCharValue() {
         return ' ';
     }
 
@@ -47,26 +56,50 @@ public class Field {
     public boolean isFilledCellAt(int x, int y) {
         checkX(x);
         checkY(y);
-        return fieldArray.get(y * defineDefaultFieldWidth() + x);
+        return fieldArray.get(y * getWidth() + x);
     }
 
-    public int defineDefaultFieldHeight() {
+    public static int defineDefaultFieldHeight() {
         return 20;
     }
 
-    public int defineDefaultFieldWidth() {
+    public static int defineDefaultFieldWidth() {
         return 10;
     }
 
     private void checkX(int x) {
-        if (x < 0 || defineDefaultFieldWidth() <= x) {
+        if (x < 0 || getWidth() <= x) {
             throw new IllegalArgumentException("x: " + x);
         }
     }
 
     private void checkY(int y) {
-        if (y < 0 || defineDefaultFieldHeight() <= y) {
+        if (y < 0 || getHeight() <= y) {
             throw new IllegalArgumentException("y: " + y);
         }
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    private void setWidth(int width) {
+        if (width < 1) {
+            throw new IllegalArgumentException(
+                    "Width of the field is not right.");
+        }
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    private void setHeight(int height) {
+        if (height < 1) {
+            throw new IllegalArgumentException(
+                    "Height of the field is not right.");
+        }
+        this.height = height;
     }
 }

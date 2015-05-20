@@ -131,4 +131,8 @@ public class Field {
         }
         this.height = height;
     }
+
+    public boolean isEmpty() {
+        return true;
+    }
 }

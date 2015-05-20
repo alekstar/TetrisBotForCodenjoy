@@ -77,4 +77,11 @@ public class FieldTest {
         Field field = Field.createStandartEmptyField();
         assertTrue(field.isEmpty());
     }
+
+    @Test
+    public void shouldIsEmptyMethodReturnFalseIfCellInLowerLeftCornerIsFilled() {
+        Field field = Field.createStandartEmptyField();
+        field.fillCellAt(0, 0);
+        assertFalse(field.isEmpty());
+    }
 }

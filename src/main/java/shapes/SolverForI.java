@@ -24,9 +24,25 @@ public class SolverForI extends AbstractShapeSolver {
         throw new RuntimeException("Can't find free cell");
     }
 
+    private boolean isFieldEmpty() {
+        Field field = getField();
+        for (int y = 0; y < field.getHeight(); y++) {
+            for (int x = 0; x < field.getWidth(); x++) {
+                if (field.isFilledCellAt(x, y)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     @Override
     public String defineCommandLine() {
-        TetrisCoordinates coordinates = defineFreeCellCoordinates();
+        if (isFieldEmpty()) {
+            return "rotate=1, left=2, drop";
+        }
+        TetrisCoordinates coordinates =
+                defineFreeCellCoordinatesFor0DegreeAngle();
         if (coordinates.getX() < 5) {
             return moveLeft(4 - coordinates.getX()) + ", " + drop();
         } else {

@@ -133,6 +133,9 @@ public class Field {
     }
 
     public boolean isEmpty() {
+        if (isFilledCellAt(0, 0)) {
+            return false;
+        }
         return true;
     }
 }

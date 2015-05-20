@@ -71,4 +71,10 @@ public class FieldTest {
                 new TetrisCoordinates[] { new TetrisCoordinates(4, 5) };
         assertTrue(areFilledOnlySpecifiedCells(field, filledCells));
     }
+
+    @Test
+    public void shouldIsEmptyMethodReturnTrueForEmptyField() {
+        Field field = Field.createStandartEmptyField();
+        assertTrue(field.isEmpty());
+    }
 }

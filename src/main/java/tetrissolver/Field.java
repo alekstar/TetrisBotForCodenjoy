@@ -136,6 +136,9 @@ public class Field {
         if (isFilledCellAt(0, 0)) {
             return false;
         }
+        if (isFilledCellAt(getWidth() - 1, 0)) {
+            return false;
+        }
         return true;
     }
 }

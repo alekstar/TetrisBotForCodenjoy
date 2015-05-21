@@ -91,4 +91,14 @@ public class FieldTest {
         field.fillCellAt(field.getWidth() - 1, 0);
         assertFalse(field.isEmpty());
     }
+
+    @Test
+    public void shouldIsEmptyMethodReturnFalseIfCellsInUpperRightUpperLeftAndInCenterAreFilled() {
+        Field field = Field.createStandartEmptyField();
+        field.fillCellAt(0, field.getHeight() - 1);
+        field.fillCellAt(field.getWidth() - 1, field.getHeight() - 1);
+        field.fillCellAt(field.getWidth() / 2, field.getHeight() / 2);
+        assertFalse(field.isEmpty());
+
+    }
 }

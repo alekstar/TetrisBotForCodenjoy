@@ -25,16 +25,6 @@ public class SolverForI extends AbstractShapeSolver {
     }
 
     private boolean isFieldEmpty() {
-        Field field = getField();
-        for (int y = 0; y < field.getHeight(); y++) {
-            for (int x = 0; x < field.getWidth(); x++) {
-                if (field.isFilledCellAt(x, y)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    private boolean isFieldEmpty() {
         return getField().isEmpty();
     }
 
@@ -43,13 +33,11 @@ public class SolverForI extends AbstractShapeSolver {
         if (isFieldEmpty()) {
             return "rotate=1, left=2, drop";
         }
-        TetrisCoordinates coordinates =
-                defineFreeCellCoordinatesFor0DegreeAngle();
+        TetrisCoordinates coordinates = defineFreeCellCoordinates();
         if (coordinates.getX() < 5) {
             return moveLeft(4 - coordinates.getX()) + ", " + drop();
         } else {
             return moveRight(coordinates.getX() - 4) + ", " + drop();
         }
     }
-
 }

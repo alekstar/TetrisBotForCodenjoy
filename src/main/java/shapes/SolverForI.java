@@ -14,8 +14,8 @@ public class SolverForI extends AbstractShapeSolver {
     }
 
     private TetrisCoordinates defineFreeCellCoordinates() {
-        for (int y = 0; y < getField().defineDefaultFieldHeight(); y++) {
-            for (int x = 0; x < getField().defineDefaultFieldWidth(); x++) {
+        for (int y = 0; y < getField().getHeight(); y++) {
+            for (int x = 0; x < getField().getWidth(); x++) {
                 if (!getField().isFilledCellAt(x, y)) {
                     return TetrisCoordinates.create(x, y);
                 }

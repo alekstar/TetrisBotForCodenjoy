@@ -28,9 +28,21 @@ public class SolverForI extends AbstractShapeSolver {
         return getField().isEmpty();
     }
 
+    private boolean areFree4CellsInLowerLeftCorner() {
+        for (int x = 0; x < 4; x++) {
+            if (getField().isFilledCellAt(x, 0)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public String defineCommandLine() {
         if (isFieldEmpty()) {
+            return "rotate=1, left=2, drop";
+        }
+        if (areFree4CellsInLowerLeftCorner()) {
             return "rotate=1, left=2, drop";
         }
         TetrisCoordinates coordinates = defineFreeCellCoordinates();

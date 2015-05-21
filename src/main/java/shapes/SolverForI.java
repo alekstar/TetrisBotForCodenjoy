@@ -34,6 +34,8 @@ public class SolverForI extends AbstractShapeSolver {
             }
         }
         return true;
+    private boolean isFieldEmpty() {
+        return getField().isEmpty();
     }
 
     @Override

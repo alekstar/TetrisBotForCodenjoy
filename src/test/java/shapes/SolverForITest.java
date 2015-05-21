@@ -16,4 +16,16 @@ public class SolverForITest {
         String expectedCommandLine = "rotate=1, left=2, drop";
         assertEquals(expectedCommandLine, actualCommandLine);
     }
+
+    @Test
+    public void ifThereIs4FreeCellsInLowerLeftCornerShouldRotateOnceMoveLeftTwiceAndDrop() {
+        Field field = Field.createStandartEmptyField();
+        for (int x = 4; x < field.getWidth(); x++) {
+            field.fillCellAt(x, 0);
+        }
+        ShapeSolver solver = SolverForI.create(field);
+        String actualCommandLine = solver.defineCommandLine();
+        String expectedCommandLine = "rotate=1, left=2, drop";
+        assertEquals(expectedCommandLine, actualCommandLine);
+    }
 }

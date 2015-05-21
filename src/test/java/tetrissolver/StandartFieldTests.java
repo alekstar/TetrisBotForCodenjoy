@@ -18,8 +18,7 @@ public class StandartFieldTests {
         return false;
     }
 
-    private boolean areFilledOnlySpecifiedCells(Field field,
-            TetrisCoordinates[] filledCells) {
+    private boolean areFilledOnlySpecifiedCells(TetrisCoordinates[] filledCells) {
         for (int y = 0; y < field.getHeight(); y++) {
             for (int x = 0; x < field.getWidth(); x++) {
                 if (haveToBeFilled(TetrisCoordinates.create(x, y), filledCells)
@@ -36,7 +35,7 @@ public class StandartFieldTests {
         field.fillCellAt(4, 5);
         TetrisCoordinates[] filledCells =
                 new TetrisCoordinates[] { new TetrisCoordinates(4, 5) };
-        assertTrue(areFilledOnlySpecifiedCells(field, filledCells));
+        assertTrue(areFilledOnlySpecifiedCells(filledCells));
     }
 
     @Test

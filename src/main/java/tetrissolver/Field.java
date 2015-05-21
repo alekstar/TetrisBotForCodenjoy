@@ -133,11 +133,12 @@ public class Field {
     }
 
     public boolean isEmpty() {
-        if (isFilledCellAt(0, 0)) {
-            return false;
-        }
-        if (isFilledCellAt(getWidth() - 1, 0)) {
-            return false;
+        for (int y = 0; y < getHeight(); y++) {
+            for (int x = 0; x < getWidth(); x++) {
+                if (isFilledCellAt(x, y)) {
+                    return false;
+                }
+            }
         }
         return true;
     }
